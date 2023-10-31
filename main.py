@@ -147,22 +147,22 @@ def  best_developer_year(año : int):
 #         'Valve' : [Negative = 182, Positive = 278]
     # }
 # ML
-@app.get('/recomendacion_juego/{id_del_producto}')
-def recomendacion_juego(id_del_producto: str):
-     ''' 
-     Ingresando el id de producto, deberíamos recibir una lista con 5 juegos recomendados similares al ingresado.
-      '''
-    games_model= pd.read_parquet(r'./Data/endponint6_with_reco.parquetparquet.gzip')
-    #def recomendacion_juego( id de producto ): Ingresando el id de producto,
-    # deberíamos recibir una lista con 5 juegos recomendados similares al ingresado.
-    item_indice = games_model[games_model['id'] == id_del_producto].index[0] # Extraemos el indice de nuestro juego en nuestro dataset de juegos
-    items_similares = list(enumerate(cosine_sim[item_indice])) # Conseguimos nuestros items similares
-    recommended_items = sorted(items_similares, key=lambda x: x[1], reverse=True) # Ahora ordenamos para saber nuestros items mas recomendados
-    indices = [index for index, _ in recommended_items[1:10]] # Extraemos los indices de los juegos
-    recommended_items = games_model.iloc[indices]['id'].tolist() # Convertimos a listas con nuestros ids, (podriamos poner nuestros app_name)
-    recomedations = ""
-    for i in recommended_items[:5]:
-        recomedations+=f'<p>{games_model[games_model.id == i].app_name.tolist()[0]}</p>'
+# @app.get('/recomendacion_juego/{id_del_producto}')
+# def recomendacion_juego(id_del_producto: str):
+#      ''' 
+#      Ingresando el id de producto, deberíamos recibir una lista con 5 juegos recomendados similares al ingresado.
+#       '''
+#     games_model= pd.read_parquet(r'./Data/endponint6_with_reco.parquetparquet.gzip')
+#     #def recomendacion_juego( id de producto ): Ingresando el id de producto,
+#     # deberíamos recibir una lista con 5 juegos recomendados similares al ingresado.
+#     item_indice = games_model[games_model['id'] == id_del_producto].index[0] # Extraemos el indice de nuestro juego en nuestro dataset de juegos
+#     items_similares = list(enumerate(cosine_sim[item_indice])) # Conseguimos nuestros items similares
+#     recommended_items = sorted(items_similares, key=lambda x: x[1], reverse=True) # Ahora ordenamos para saber nuestros items mas recomendados
+#     indices = [index for index, _ in recommended_items[1:10]] # Extraemos los indices de los juegos
+#     recommended_items = games_model.iloc[indices]['id'].tolist() # Convertimos a listas con nuestros ids, (podriamos poner nuestros app_name)
+#     recomedations = ""
+#     for i in recommended_items[:5]:
+#         recomedations+=f'<p>{games_model[games_model.id == i].app_name.tolist()[0]}</p>'
     return recomedations # Retornamos los primeros 5
 
 
