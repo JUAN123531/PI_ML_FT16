@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import pandas as pd
-from recommendation import cosine_sim
+# from recommendation import cosine_sim
 
 
 app = FastAPI()
