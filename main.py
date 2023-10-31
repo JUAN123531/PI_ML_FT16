@@ -134,17 +134,17 @@ def  best_developer_year(año : int):
 
 # 5
 
-@app.get('/developer_reviews_analysis/')
-def developer_reviews_analysis(desarrollador : int) -> dict:
-    """
-   Según el desarrollador, se devuelve un diccionario con el nombre del desarrollador como llave y una lista con la cantidad total de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento como valor positivo o negativo
-    """
-    df = pd.read_parquet(r'./Data/endpoint5.parquet.gzip')
-    fil = df[df.year == year]
-    Negative= 
-    Positive =
-    return {
-        'Valve' : [Negative = 182, Positive = 278]
+# @app.get('/developer_reviews_analysis/')
+# def developer_reviews_analysis(desarrollador : int) -> dict:
+#     """
+#    Según el desarrollador, se devuelve un diccionario con el nombre del desarrollador como llave y una lista con la cantidad total de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento como valor positivo o negativo
+#     """
+#     df = pd.read_parquet(r'./Data/endpoint5.parquet.gzip')
+#     fil = df[df.year == year]
+#     Negative= 
+#     Positive =
+#     return {
+#         'Valve' : [Negative = 182, Positive = 278]
     }
 # ML
 @app.get('/recomendacion_juego/{id_del_producto}')
