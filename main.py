@@ -163,7 +163,7 @@ def  best_developer_year(año : int):
 #     recomedations = ""
 #     for i in recommended_items[:5]:
 #         recomedations+=f'<p>{games_model[games_model.id == i].app_name.tolist()[0]}</p>'
-    return recomedations # Retornamos los primeros 5
+    # return recomedations # Retornamos los primeros 5
 
 
 
