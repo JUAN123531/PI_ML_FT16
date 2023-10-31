@@ -145,7 +145,7 @@ def  best_developer_year(año : int):
 #     Positive =
 #     return {
 #         'Valve' : [Negative = 182, Positive = 278]
-    }
+    # }
 # ML
 @app.get('/recomendacion_juego/{id_del_producto}')
 def recomendacion_juego(id_del_producto: str):
