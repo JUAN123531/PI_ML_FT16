@@ -9,9 +9,11 @@ app = FastAPI()
 # 1
 
 
-@app.get('/developer/')
-def developer(desarrollador: str) -> int:
-    ''' Cantidad de items y porcentaje de contenido Free por año según empresa desarrolladora'''
+@app.get('/genero /')
+def PlayTimeGenre(genero : str):
+    ''' Debe devolver año con mas horas jugadas para dicho género.
+        Ejemplo de retorno: 
+       {"Año de lanzamiento con más horas jugadas para Género X" : 2013}'''
     df = pd.read_parquet(r'./Data/endpoint1.parquet.gzip')
     fil = df[df.year == year]
     items_count = len(df[df.item_id == item_id])
@@ -23,10 +25,11 @@ def developer(desarrollador: str) -> int:
 # 2
 
 
-@app.get('/userdata/')
-def userdata(user_id : str) -> dict:
+@app.get('/UserForGenre/')
+def UserForGenre(genero : str) :
     """
- Debe devolver cantidad de dinero gastado por el usuario, el porcentaje de recomendación en base a reviews.recommend y cantidad de items.
+ Debe devolver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año.
+ Ejemplo de retorno: {"Usuario con más horas jugadas para Género X" : us213ndjss09sdf, "Horas jugadas":[{Año: 2013, Horas: 203}, {Año: 2012, Horas: 100}, {Año: 2011, Horas: 23}]}
     """
     df = pd.read_parquet(r'./Data/endpoint2.parquet.gzip')
     user_data = df[df['user_id'] == user_id]
@@ -54,10 +57,11 @@ def userdata(user_id : str) -> dict:
 # 3
 
 
-@app.get('/UserForGenre/')
-def UserForGenre(genero : str ):
+@app.get('/UsersRecommend/')
+def UsersRecommend(genero : str ):
     """
-    Debe devolver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año. Ejemplo de retorno: {"Usuario con más horas jugadas para Género X" : us213ndjss09sdf, "Horas jugadas":[{Año: 2013, Horas: 203}, {Año: 2012, Horas: 100}, {Año: 2011, Horas: 23}]}
+    Devuelve el top 3 de juegos MÁS recomendados por usuarios para el año dado. (reviews.recommend = True y comentarios positivos/neutrales)
+    Ejemplo de retorno: [{"Puesto 1" : X}, {"Puesto 2" : Y},{"Puesto 3" : Z}]
     """
     df = pd.read_parquet(r'./Data/endpoint3.parquet.gzip')
     # Verifica si el genero ingresado existe en el DataFrame
@@ -118,11 +122,11 @@ def UserForGenre(genero : str ):
 # 4
 
 
-@app.get('/best_developer_year/')
-def  best_developer_year(año : int):
+@app.get('/UsersWorstDeveloper/')
+def  UsersWorstDeveloper(año : int):
     """
-   Devuelve el top 3 de juegos MÁS recomendados por usuarios para el año dado. (reviews.recommend = True y comentarios positivos/neutrales)
-    Ejemplo de retorno: [{"Puesto 1" : X}, {"Puesto 2" : Y},{"Puesto 3" : Z}]
+   Devuelve el top 3 de desarrolladoras con juegos MENOS recomendados por usuarios para el año dado. (reviews.recommend = False y comentarios negativos)
+   Ejemplo de retorno: [{"Puesto 1" : X}, {"Puesto 2" : Y},{"Puesto 3" : Z}]
     """
     df = pd.read_parquet(r'./Data/endpoint4.parquet.gzip')
     fil = df['reviews_recommend','reviews_helpful','reviews_review']
@@ -134,10 +138,11 @@ def  best_developer_year(año : int):
 
 # 5
 
-# @app.get('/developer_reviews_analysis/')
-# def developer_reviews_analysis(desarrollador : int) -> dict:
+# @app.get('/sentiment_analysis/')
+# def sentiment_analysis(empresa desarrolladora : str) :
 #     """
-#    Según el desarrollador, se devuelve un diccionario con el nombre del desarrollador como llave y una lista con la cantidad total de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento como valor positivo o negativo
+#     Según la empresa desarrolladora, se devuelve un diccionario con el nombre de la desarrolladora como llave y una lista con la cantidad total de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento como valor.
+Ejemplo de retorno: {'Valve' : [Negative = 182, Neutral = 120, Positive = 278]}
 #     """
 #     df = pd.read_parquet(r'./Data/endpoint5.parquet.gzip')
 #     fil = df[df.year == year]

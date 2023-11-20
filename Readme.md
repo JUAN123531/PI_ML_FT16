@@ -47,21 +47,21 @@ Tambien implementa un sistema de recomendación de videojuegos utilizando el enf
 
 - Se han creado las siguientes funciones para los endpoints de la API:
 
-+ def **developer( *`desarrollador` : str* )**:
-    `Cantidad de items y porcentaje` de contenido Free por año según empresa desarrolladora
++ def PlayTimeGenre( genero : str ): Debe devolver año con mas horas jugadas para dicho género.
+Ejemplo de retorno: {"Año de lanzamiento con más horas jugadas para Género X" : 2013}
 
-+ def **userdata( *`user_id` : str* )**:
-    Devuelve la `cantidad` de dinero gastado por el usuario, el porcentaje de recomendación en base a reviews.recommend y cantidad de items. 
 
-+ def **UserForGenre( *`género` : str* )**:
-    Debe devolver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año de lanzamiento.
++def UserForGenre( genero : str ): Debe devolver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año.
+Ejemplo de retorno: {"Usuario con más horas jugadas para Género X" : us213ndjss09sdf, "Horas jugadas":[{Año: 2013, Horas: 203}, {Año: 2012, Horas: 100}, {Año: 2011, Horas: 23}]} 
 
-+ def **best_developer_year( *`año` : int* )**:
-    Devuelve el top 3 de desarrolladores con juegos MÁS recomendados por usuarios para el año dado. (reviews.recommend = True y comentarios positivos)
++ def UsersRecommend( año : int ): Devuelve el top 3 de juegos MÁS recomendados por usuarios para el año dado. (reviews.recommend = True y comentarios positivos/neutrales)
+Ejemplo de retorno: [{"Puesto 1" : X}, {"Puesto 2" : Y},{"Puesto 3" : Z}]
 
-+ def **developer_reviews_analysis( *`desarrolladora` : str* )**:
-    Según el desarrollador, se devuelve un diccionario con el nombre del desarrollador como llave y una lista con la cantidad total de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento como valor positivo o negativo.
++def UsersWorstDeveloper( año : int ): Devuelve el top 3 de desarrolladoras con juegos MENOS recomendados por usuarios para el año dado. (reviews.recommend = False y comentarios negativos)
+Ejemplo de retorno: [{"Puesto 1" : X}, {"Puesto 2" : Y},{"Puesto 3" : Z}]
 
++def sentiment_analysis( empresa desarrolladora : str ): Según la empresa desarrolladora, se devuelve un diccionario con el nombre de la desarrolladora como llave y una lista con la cantidad total de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento como valor.
+Ejemplo de retorno: {'Valve' : [Negative = 182, Neutral = 120, Positive = 278]}
 
 + def **recomendacion_juego( `id de producto`  )**:
    Ingresando el id de producto, deberíamos recibir una lista con 5 juegos recomendados similares al ingresado.
@@ -71,13 +71,9 @@ Tambien implementa un sistema de recomendación de videojuegos utilizando el enf
 ### Transformaciones 
 
 - Se ha realizado la lectura de los datasets en el formato JSON.
-- Se ha realizado una exhaustiva transformacion de datos, limpieza, imputacion de datos faltantes, etc.
-- se han exportado como parquet o csv.
+- Se ha realizado transformacion de datos, limpieza, imputacion de datos faltantes, etc.
+- se han exportado como parquet.
 - Las columnas y filas innecesarias se han eliminado para optimizar el rendimiento de la API y el entrenamiento del modelo.
-
-
-
-
 
 
 
